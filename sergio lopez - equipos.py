@@ -1,6 +1,7 @@
 from fastapi import FastAPI, HTTPException
 from pydantic import BaseModel
 from typing import List, Optional
+import os
 
 app = FastAPI()
 
@@ -220,3 +221,11 @@ def deljugeq(team_id: int, player_id: int):
                     return p
     
     raise HTTPException(status_code=404, detail="not found")
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(
+        "main:app",
+        host="0.0.0.0",
+        port=int(os.environ.get("PORT", 8080))
+    )
